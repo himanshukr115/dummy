@@ -1,0 +1,30 @@
+const Order = require('./models/order'); // Ensure this path is correct
+
+// Checkout route
+app.post('/checkout', async (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
+    const userId = req.session.user.id;
+    const cart = req.session.cart || [];
+    const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+    try {
+        const order = new Order({
+            user: userId,
+            items: cart.map(item => ({
+                item: item._id,
+                quantity: item.quantity
+            })),
+            total: total
+        });
+
+        await order.save();
+        req.session.cart = []; // Clear the cart after checkout
+        res.redirect('/orders');
+    } catch (err) {
+        console.error(err);
+        res.redirect('/cart');
+    }
+});
