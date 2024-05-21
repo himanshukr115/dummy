@@ -1,0 +1,16 @@
+// Route to display past orders
+app.get('/orders', async (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
+    const userId = req.session.user.id;
+
+    try {
+        const orders = await Order.find({ user: userId }).populate('items.item');
+        res.render('orders', { orders });
+    } catch (err) {
+        console.error(err);
+        res.redirect('/');
+    }
+});
