@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders</title>
+</head>
+<body>
+    <h1>Your Orders</h1>
+    <% if (orders.length > 0) { %>
+        <% orders.forEach(order => { %>
+            <div class="order">
+                <h2>Order ID: <%= order.orderId %></h2>
+                <p>Order Date: <%= order.createdAt.toDateString() %></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% order.items.forEach(item => { %>
+                            <tr>
+                                <td><%= item.item.name %></td>
+                                <td><%= item.quantity %></td>
+                                <td><%= item.item.price %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <p>Total: <%= order.total %></p>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>You have no orders.</p>
+    <% } %>
+    <a href="/menu">Back to Menu</a>
+</body>
+</html>
