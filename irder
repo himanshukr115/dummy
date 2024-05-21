@@ -1,0 +1,24 @@
+<h1>Your Orders</h1>
+    <% if (orders.length > 0) { %>
+        <ul>
+            <% orders.forEach(order => { %>
+                <li>
+                    <h2>Order placed on <%= order.orderedAt.toDateString() %></h2>
+                    <ul>
+                        <% order.items.forEach(orderItem => { %>
+                            <li>
+                                <strong>Item:</strong> <%= orderItem.item.name %> 
+                                <strong>Quantity:</strong> <%= orderItem.quantity %> 
+                                <strong>Price:</strong> <%= orderItem.item.price %> 
+                                <strong>Total:</strong> <%= orderItem.quantity * orderItem.item.price %>
+                            </li>
+                        <% }) %>
+                    </ul>
+                    <p><strong>Order Total:</strong> <%= order.total %></p>
+                </li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>You have no past orders.</p>
+    <% } %>
+    <a href="/menu">Back to Menu</a>
