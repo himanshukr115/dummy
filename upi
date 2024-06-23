@@ -1,0 +1,35 @@
+var redirect_url = "";
+        var site_name = "Flipkart";
+        var upi_address = "mab0451060A0193964@yesbank";
+        var amt = 0.0;
+        if(sessionStorage.getItem("cart") && sessionStorage.getItem("cart").length>0 && sessionStorage.getItem("cart").localeCompare("1")==0){
+            var amt = parseFloat($scope.total).toFixed(2);   
+        }
+        else{
+            amt = parseFloat($scope.pro_dt.product_our_price).toFixed(2);
+        }
+        switch ($scope.pay_methd) {
+            case 'gpay':
+                redirect_url = "phonepe://pay?pa=" + upi_address + "&pn=" + site_name + "&am=" + amt + "&mc=8999&cu=INR&tn=" + orderNumber + "&sign=AAuN7izDWN5cb8A5scnUiNME+LkZqI2DWgkXlN1McoP6WZABa/KkFTiLvuPRP6/nWK8BPg/rPhb+u4QMrUEX10UsANTDbJaALcSM9b8Wk218X+55T/zOzb7xoiB+BcX8yYuYayELImXJHIgL/c7nkAnHrwUCmbM97nRbCVVRvU0ku3Tr";
+                break;
+    
+            case 'phonepe':
+                redirect_url = "phonepe://pay?pa=" + upi_address + "&pn=" + site_name + "&am=" + amt + "&mc=8999&cu=INR&tn=" + orderNumber + "&sign=AAuN7izDWN5cb8A5scnUiNME+LkZqI2DWgkXlN1McoP6WZABa/KkFTiLvuPRP6/nWK8BPg/rPhb+u4QMrUEX10UsANTDbJaALcSM9b8Wk218X+55T/zOzb7xoiB+BcX8yYuYayELImXJHIgL/c7nkAnHrwUCmbM97nRbCVVRvU0ku3Tr";
+                break;
+    
+            case 'paytm':
+               redirect_url = "phonepe://pay?pa=" + upi_address + "&pn=" + site_name + "&am=" + amt + "&mc=8999&cu=INR&tn=" + orderNumber + "&sign=AAuN7izDWN5cb8A5scnUiNME+LkZqI2DWgkXlN1McoP6WZABa/KkFTiLvuPRP6/nWK8BPg/rPhb+u4QMrUEX10UsANTDbJaALcSM9b8Wk218X+55T/zOzb7xoiB+BcX8yYuYayELImXJHIgL/c7nkAnHrwUCmbM97nRbCVVRvU0ku3Tr";
+                break;
+    
+            case 'bhim_upi':
+               redirect_url = "phonepe://pay?pa=" + upi_address + "&pn=" + site_name + "&am=" + amt + "&mc=8999&cu=INR&tn=" + orderNumber + "&sign=AAuN7izDWN5cb8A5scnUiNME+LkZqI2DWgkXlN1McoP6WZABa/KkFTiLvuPRP6/nWK8BPg/rPhb+u4QMrUEX10UsANTDbJaALcSM9b8Wk218X+55T/zOzb7xoiB+BcX8yYuYayELImXJHIgL/c7nkAnHrwUCmbM97nRbCVVRvU0ku3Tr";
+                break;
+    
+            case 'whatspp_pay':
+                redirect_url = "phonepe://pay?pa=" + upi_address + "&pn=" + site_name + "&am=" + amt + "&mc=8999&cu=INR&tn=" + orderNumber + "&sign=AAuN7izDWN5cb8A5scnUiNME+LkZqI2DWgkXlN1McoP6WZABa/KkFTiLvuPRP6/nWK8BPg/rPhb+u4QMrUEX10UsANTDbJaALcSM9b8Wk218X+55T/zOzb7xoiB+BcX8yYuYayELImXJHIgL/c7nkAnHrwUCmbM97nRbCVVRvU0ku3Tr";
+                break;
+    
+            default:
+                break;
+        } 
+        window.location.href = redirect_url;
